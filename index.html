@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="js/script.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/5999ae438d.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap");
+    </style>
+    <title>Weather APP</title>
+  </head>
+  <body>
+    <div class="input">
+      <select name="cities" id="cities-select" class="city-input" onchange="checkWeather()">
+        <option value="" disabled selected>--Seleccione--</option>
+        <!--<option value="rosario">Rosario</option>
+        <option value="cordoba">Córdoba</option>
+        <option value="mendoza">Mendoza</option>
+        <option value="salta">Salta</option>
+        <option value="ushuaia">Ushuaia</option>
+        <option value="posadas">Posadas</option>-->
+      </select>
+      <button
+        type="button"
+        title="Buscar ciudad"
+        value="search"
+        id="btn-1"
+        onclick="checkWeather()"
+      >
+        <i class="fas fa-search" id="icon-search"></i>
+      </button>
+      <button
+        type="button"
+        title="Agregar ciudad"
+        value="add"
+        id="btn-add"
+        onclick="displayCityInput()"
+      >
+        <i class="fas fa-plus" id="icon-add"></i>
+      </button>
+    </div>
+    <div class="div-input" id="input-div">
+      <input
+        type="text"
+        class="input-city"
+        id="add-city-value"
+        placeholder="Ingrese la ciudad"
+      />
+      <button type="button" value="add-city" id="btn" onclick="addCity()">
+        <i class="fas fa-check" id="icon-check"></i>
+      </button>
+    </div>
+    <div class="result">
+      <div class="left-panel">
+        <h3 class="tiempo"></h3>
+        <div class="city"></div>
+        <div class="date" id="date"></div>
+        <div class="temp"></div>
+        <div class="description"></div>
+        <div class="humidity"></div>
+        <div class="sen-term"></div>
+        <div class="pressure"></div>
+        <div class="wind"></div>
+      </div>
+      <div class="right-panel">
+        <div class="icon-div"><img src="" alt="" class="icon" /></div>
+        <div class="min-max">
+          <h3 class="temp-min"></h3>
+          <h3 class="temp-max"></h3>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
