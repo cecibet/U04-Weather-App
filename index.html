@@ -22,14 +22,13 @@
   </head>
   <body>
     <div class="input">
-      <select name="cities" id="cities-select" class="city-input" onchange="checkWeather()">
+      <select
+        name="cities"
+        id="cities-select"
+        class="city-input"
+        onchange="checkWeather()"
+      >
         <option value="" disabled selected>--Seleccione--</option>
-        <!--<option value="rosario">Rosario</option>
-        <option value="cordoba">Córdoba</option>
-        <option value="mendoza">Mendoza</option>
-        <option value="salta">Salta</option>
-        <option value="ushuaia">Ushuaia</option>
-        <option value="posadas">Posadas</option>-->
       </select>
       <button
         type="button"
@@ -49,6 +48,18 @@
       >
         <i class="fas fa-plus" id="icon-add"></i>
       </button>
+      <button
+        type="button"
+        title="Eliminar ciudad"
+        value="remove"
+        id="btn-rm"
+        onclick="deleteCity()"
+      >
+        <i class="fas fa-times" id="icon-rm"></i>
+      </button>
+    </div>
+    <div id="div-error">
+      <span id="show-error"></span>
     </div>
     <div class="div-input" id="input-div">
       <input
