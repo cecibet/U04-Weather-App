@@ -11,6 +11,10 @@ body {
   align-items: center;
   font-family: "Roboto", sans-serif;
   background: url("img/sky.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .input {
@@ -203,4 +207,3 @@ div.min-max {
     text-align: center;
   }
 }
-
