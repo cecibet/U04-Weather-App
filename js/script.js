@@ -6,6 +6,7 @@ const button = document.getElementById("btn");
 var buttonToInput = document.getElementById("btn-add");
 var showError = document.getElementById("show-error");
 var errorDiv = document.getElementById("div-error");
+buttonToInput.disabled = false;
 
 var selectArr;
 
@@ -26,8 +27,8 @@ inputCity.addEventListener("keyup", function (event) {
     button.click();
   }
 });
-buttonToInput.disabled = false;
-function validateData() {
+
+function validateSelection() {
   if (!selectCity.value) {
     alert("No ha seleccionado una ciudad válida");
     return false;
@@ -41,7 +42,7 @@ function displayCityInput() {
   buttonToInput.disabled = true;
 }
 
-function validateCity() {
+function validateInput() {
   if (!inputCity.value) {
     alert("Ingrese el nombre de la ciudad");
     return false;
@@ -49,8 +50,8 @@ function validateCity() {
   return true;
 }
 
-function cityExists() {
-  if (validateCity()) {
+function notInList() {
+  if (validateInput()) {
     for (i = 0; i < selectCity.length; ++i) {
       if (selectCity.options[i].value == inputCity.value) {
         alert("La ciudad ya se encuentra en la lista");
@@ -61,9 +62,30 @@ function cityExists() {
   }
 }
 
+async function cityExists() {
+  if (validateInput() && notInList()) {
+    try {
+      var city = inputCity.value;
+      const response = await fetch(
+        "https://api.openweathermap.org/data/2.5/weather?q=" +
+          city +
+          "&appid=3936d0749fdc3124c6566ed26cf11978&units=metric&lang=es"
+      );
+      const data = await response.json();
+      if (response.status == 404) {
+        displayError();
+      } else {
+        console.log(data);
+        addCity();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
 function addCity() {
-  removeError();
-  if (cityExists()) {
+  if (notInList()) {
     addCityOption();
     saveData();
     clearInput();
@@ -77,6 +99,11 @@ function addCityOption() {
   var newCity = inputCity.value;
   selectCity.options.add(new Option(newCity, newCity));
   alert("La ciudad se agregó con éxito");
+}
+
+function displayError() {
+  alert("La ciudad ingresada no se encuentra en la base de datos");
+  inputCity.value = "";
 }
 
 function deleteCity() {
@@ -104,9 +131,8 @@ function clearInput() {
 }
 
 async function checkWeather() {
-  removeError();
   clearInput();
-  if (validateData()) {
+  if (validateSelection()) {
     try {
       var city = selectCity.value;
       const response = await fetch(
@@ -119,7 +145,7 @@ async function checkWeather() {
       displayResult(data);
     } catch (error) {
       console.log(error);
-      displayError();
+      displayError("Algo salió mal");
     }
   }
 }
@@ -155,19 +181,3 @@ function getDate() {
   var time = today.getHours() + ":" + today.getMinutes();
   return "Hasta las " + time + ", ART";
 }
-
-function displayError() {
-  errorDiv.style.display = "block";
-  showError.innerText =
-    "La ciudad ingresada no se encuentra en la base de datos.";
-}
-
-function removeError() {
-  showError.innerText = "";
-  errorDiv.style.display = "none";
-}
-
-setTimeout(function () {
-  showError.innerText = "";
-  errorDiv.style.display = "none";
-}, 7000);

@@ -91,20 +91,6 @@ button:hover {
   margin-top: 1em;
 }
 
-#div-error {
-  display: none;
-  margin-top: 1em;
-  justify-content: left;
-}
-
-#show-error {
-  color: rgba(211, 12, 12, 0.698);
-  background: rgba(243, 246, 246, 0.3) 70%;
-  border-radius: 9px;
-  font-size: 1.25em;
-  padding: 10px;
-}
-
 div.result {
   display: none;
   margin-top: 3em;
